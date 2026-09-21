@@ -6,38 +6,26 @@
 
     <!-- SEO propio de esta página: título (≤ 60 caracteres, si no Google lo
          corta), descripción y URL únicos. -->
-    <title>The Big Bang Theory: personajes, temporadas y ciencia</title>
-    <meta name="description" content="Sitio tributo a The Big Bang Theory: los personajes, las 12 temporadas y un quiz de física cuántica.">
+    <title>Quiz de The Big Bang Theory y física | TBBT Universe</title>
+    <meta name="description" content="Seis preguntas sobre física y sobre The Big Bang Theory. Poné a prueba si estás a la altura del apartamento 4A.">
     <meta name="theme-color" content="#1a1a1a">
     <!-- Favicon en SVG embebido: sin archivo extra y sin el error 404 que el
          navegador genera al pedir /favicon.ico. Google lo muestra en resultados. -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>">
-    <link rel="canonical" href="https://alaninfante.github.io/Progra_IV_BigBang/">
+    <link rel="canonical" href="https://alaninfante.github.io/Progra_IV_BigBang/laboratorio.html">
 
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_AR">
     <meta property="og:site_name" content="TBBT Universe">
-    <meta property="og:title" content="The Big Bang Theory: personajes, temporadas y ciencia">
-    <meta property="og:description" content="Sitio tributo a The Big Bang Theory: los personajes, las 12 temporadas y un quiz de física cuántica.">
-    <meta property="og:url" content="https://alaninfante.github.io/Progra_IV_BigBang/">
+    <meta property="og:title" content="Quiz de The Big Bang Theory y física | TBBT Universe">
+    <meta property="og:description" content="Seis preguntas sobre física y sobre The Big Bang Theory. Poné a prueba si estás a la altura del apartamento 4A.">
+    <meta property="og:url" content="https://alaninfante.github.io/Progra_IV_BigBang/laboratorio.html">
     <meta property="og:image" content="https://alaninfante.github.io/Progra_IV_BigBang/Imagenes/hero-relatividad.webp">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
-    <!-- Datos estructurados: le explican a Google qué es la serie. -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "TBBT Universe",
-      "inLanguage": "es",
-      "about": { "@type": "TVSeries", "name": "The Big Bang Theory", "genre": "Comedia", "startDate": "2007-09-24", "endDate": "2019-05-16", "numberOfSeasons": 12, "numberOfEpisodes": 279 }
-    }
-    </script>
-    <!-- Pide la imagen del hero antes de que el CSS la descubra: es lo primero que se ve. -->
-    <link rel="preload" as="image" href="Imagenes/hero-relatividad.webp">
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
@@ -61,10 +49,10 @@
             <!-- aria-current marca la página actual: lo usa el lector de
                  pantalla y el CSS para resaltar el link. -->
             <ul class="nav__links">
-                <li><a href="index.html" aria-current="page">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="personajes.html">Personajes</a></li>
                 <li><a href="temporadas.html">Temporadas</a></li>
-                <li><a href="laboratorio.html">Laboratorio</a></li>
+                <li><a href="laboratorio.html" aria-current="page">Laboratorio</a></li>
             </ul>
 
             <!-- aria-pressed comunica el estado del botón al lector de pantalla. -->
@@ -76,51 +64,31 @@
     </header>
 
     <main id="contenido">
-        <!-- ===== HERO ===== -->
-        <section id="inicio" class="hero">
-            <div class="hero__content">
-                <p class="hero__eyebrow">Apartamento 4A, Pasadena</p>
-                <h1>Donde la física cuántica conoce a los cómics</h1>
-                <p class="hero__lead">
-                    Cuatro científicos, una vecina y un acuerdo de compañeros de piso
-                    de 31 páginas. Conocé al grupo y poné a prueba tu física.
-                </p>
-                <a href="personajes.html" class="btn-primary">Conocer al grupo</a>
-            </div>
-        </section>
-
-
-        <!-- ===== ACCESOS ===== -->
-        <!-- Toda la tarjeta es un solo link: área grande y fácil de tocar,
-             y un único destino por tarjeta para el lector de pantalla. -->
-        <section class="section">
+        <!-- ===== QUIZ ===== -->
+        <section id="laboratorio" class="section">
             <div class="container">
-                <h2 class="section__title">Explorá el universo</h2>
-                <p class="section__desc">Todo lo que querés saber de la serie, de sus personajes y de la ciencia detrás de los chistes.</p>
+                <h1 class="section__title">El laboratorio de pruebas</h1>
 
-                <ul class="explore">
-                    <li>
-                        <a class="explore__card" href="personajes.html">
-                            <span class="explore__icon" aria-hidden="true">🧑‍🔬</span>
-                            <h3>Personajes</h3>
-                            <p>Siete personas, cuatro doctorados y una dinámica social fascinante.</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="explore__card" href="temporadas.html">
-                            <span class="explore__icon" aria-hidden="true">📺</span>
-                            <h3>Temporadas</h3>
-                            <p>Doce temporadas y 279 episodios, de 2007 a 2019.</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="explore__card" href="laboratorio.html">
-                            <span class="explore__icon" aria-hidden="true">🧪</span>
-                            <h3>Laboratorio</h3>
-                            <p>Seis preguntas de física y de la serie. ¿Estás a la altura?</p>
-                        </a>
-                    </li>
-                </ul>
+                <p class="section__desc">Seis preguntas de ciencia y de la serie. ¿Estás a la altura del apartamento 4A?</p>
+
+                <!-- El contenido de las preguntas vive en el JS, en un arreglo.
+                     El HTML solo define dónde se muestra cada parte. -->
+                <div class="quiz">
+                    <p class="quiz__progress" id="quiz-progress">Pregunta 1 de 6</p>
+
+                    <!-- tabindex="-1": permite mover el foco acá al pasar de
+                         pregunta, sin que entre en el recorrido normal con Tab. -->
+                    <h2 id="quiz-question" tabindex="-1"></h2>
+
+                    <noscript><p>El quiz necesita JavaScript activado para funcionar.</p></noscript>
+                    <div class="quiz__options" id="quiz-options" role="group" aria-labelledby="quiz-question"></div>
+
+                    <!-- Vacío pero siempre presente: si estuviera en display:none,
+                         varios lectores de pantalla no anunciarían el resultado. -->
+                    <p id="quiz-result" class="quiz__result" role="status" aria-live="polite"></p>
+
+                    <button type="button" id="quiz-next" class="btn-quote" hidden>Siguiente pregunta</button>
+                </div>
             </div>
         </section>
     </main>

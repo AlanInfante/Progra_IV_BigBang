@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO propio de esta página: título (≤ 60 caracteres, si no Google lo
+         corta), descripción y URL únicos. -->
+    <title>Personajes de The Big Bang Theory | TBBT Universe</title>
+    <meta name="description" content="Los siete personajes principales de The Big Bang Theory: quiénes son, a qué se dedican y sus frases características.">
+    <meta name="theme-color" content="#1a1a1a">
+    <!-- Favicon en SVG embebido: sin archivo extra y sin el error 404 que el
+         navegador genera al pedir /favicon.ico. Google lo muestra en resultados. -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>">
+    <link rel="canonical" href="https://alaninfante.github.io/Progra_IV_BigBang/personajes.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="TBBT Universe">
+    <meta property="og:title" content="Personajes de The Big Bang Theory | TBBT Universe">
+    <meta property="og:description" content="Los siete personajes principales de The Big Bang Theory: quiénes son, a qué se dedican y sus frases características.">
+    <meta property="og:url" content="https://alaninfante.github.io/Progra_IV_BigBang/personajes.html">
+    <meta property="og:image" content="https://alaninfante.github.io/Progra_IV_BigBang/Imagenes/hero-relatividad.webp">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+    <!-- Datos estructurados: la lista de personajes. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Personajes principales de The Big Bang Theory",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Dr. Sheldon Cooper" },
+        { "@type": "ListItem", "position": 2, "name": "Dr. Leonard Hofstadter" },
+        { "@type": "ListItem", "position": 3, "name": "Penny" },
+        { "@type": "ListItem", "position": 4, "name": "Howard Wolowitz" },
+        { "@type": "ListItem", "position": 5, "name": "Dr. Rajesh Koothrappali" },
+        { "@type": "ListItem", "position": 6, "name": "Dra. Amy Farrah Fowler" },
+        { "@type": "ListItem", "position": 7, "name": "Dra. Bernadette Rostenkowski" }
+      ]
+    }
+    </script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Aplica el modo guardado ANTES de que se dibuje la página. Si esperara
+         al logic.js (que tiene defer), cada cambio de página mostraría un
+         parpadeo en modo normal antes de pasar a laboratorio. -->
+    <script>
+        try { if (localStorage.getItem('tema') === 'lab') document.body.classList.add('lab-mode'); } catch (e) {}
+    </script>
+
+    <!-- Permite saltar la navegación con teclado. -->
+    <a href="#contenido" class="skip-link">Ir al contenido principal</a>
+
+
+    <header class="header">
+        <nav class="nav" aria-label="Navegación principal">
+            <a class="logo" href="index.html">
+                <span aria-hidden="true">⚛️</span> TBBT Universe
+            </a>
+
+            <!-- aria-current marca la página actual: lo usa el lector de
+                 pantalla y el CSS para resaltar el link. -->
+            <ul class="nav__links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="personajes.html" aria-current="page">Personajes</a></li>
+                <li><a href="temporadas.html">Temporadas</a></li>
+                <li><a href="laboratorio.html">Laboratorio</a></li>
+            </ul>
+
+            <!-- aria-pressed comunica el estado del botón al lector de pantalla. -->
+            <button type="button" id="theme-toggle" class="btn-theme" aria-pressed="false">
+                <span class="btn-theme__icon" aria-hidden="true">🔬</span>
+                <span class="btn-theme__text">Modo laboratorio</span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="contenido">
+        <!-- ===== PERSONAJES ===== -->
+        <section id="personajes" class="section">
+            <div class="container">
+                <h1 class="section__title">Los sujetos de prueba</h1>
+                <p class="section__desc">
+                    Siete personas, cuatro doctorados y una dinámica social
+                    fascinante. Deslizá para recorrerlos y abrí cada ficha.
+                </p>
+
+                <div class="carousel">
+                    <button type="button" id="btn-prev" class="carousel__btn"
+                            aria-label="Personaje anterior" aria-controls="carousel-track">
+                        <span aria-hidden="true">◀</span>
+                    </button>
+
+                    <!-- tabindex="0" hace el carrusel scrolleable con teclado. -->
+                    <ul class="carousel__track" id="carousel-track"
+
+                        <!-- La clase card--nombre define el color de acento.
+                             data-quote guarda la frase: el JS solo la muestra. -->
+                        <li class="card card--sheldon" id="sheldon">
+                            <img src="Imagenes/sheldon.webp" alt="Sheldon Cooper con remera roja de Flash escribiendo ecuaciones de teoría de cuerdas en una pizarra" width="800" height="600">
+                            <div class="card__body">
+                                <h2>Dr. Sheldon Cooper</h2>
+                                <p class="card__role">Físico teórico</p>
+                                <p class="card__desc">Dos doctorados, un lugar innegociable en el sofá y una opinión sobre todo. Nadie le gana una discusión, aunque no tenga razón.</p>
+                                <button type="button" class="btn-quote" data-quote="Toc, toc, toc, Penny. Toc, toc, toc, Penny. Toc, toc, toc, Penny. ¡Bazinga!">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-sheldon">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-sheldon">
+                                    <dl class="facts">
+                                        <dt>Especialidad</dt><dd>Teoría de cuerdas</dd>
+                                        <dt>Manía</dt><dd>Golpea la puerta tres veces. Siempre.</dd>
+                                        <dt>Debilidad</dt><dd>Los trenes a vapor</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="card card--leonard" id="leonard">
+                            <img src="Imagenes/leonard.webp" alt="Leonard Hofstadter con campera verde junto a una mesa óptica con lentes y un osciloscopio" width="800" height="600">
+                            <div class="card__body">
+                                <h2>Dr. Leonard Hofstadter</h2>
+                                <p class="card__role">Físico experimental</p>
+                                <p class="card__desc">El pegamento social del grupo y quien siempre atiende la puerta. Convivir con Sheldon durante años ya cuenta como logro científico.</p>
+                                <button type="button" class="btn-quote" data-quote="Nuestra ciencia es real, Sheldon. Es solo que nadie más la entiende.">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-leonard">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-leonard">
+                                    <dl class="facts">
+                                        <dt>Especialidad</dt><dd>Física láser aplicada</dd>
+                                        <dt>Instrumento</dt><dd>Violonchelo</dd>
+                                        <dt>Debilidad</dt><dd>Intolerante a la lactosa, igual come helado</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="card card--penny" id="penny">
+                            <img src="Imagenes/penny.webp" alt="Penny en un sofá colorido, con remera de Cheesecake Factory y un cómic de Wonder Woman en la mano" width="800" height="600">
+                            <div class="card__body">
+                                <h2>Penny</h2>
+                                <p class="card__role">Actriz y representante farmacéutica</p>
+                                <p class="card__desc">Llegó a Pasadena soñando con actuar y terminó traduciendo el mundo real para sus vecinos científicos. Es el sentido común del grupo.</p>
+                                <button type="button" class="btn-quote" data-quote="Muy lindo todo, chicos. ¿Y eso para qué sirve en la vida real?">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-penny">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-penny">
+                                    <dl class="facts">
+                                        <dt>Origen</dt><dd>Omaha, Nebraska</dd>
+                                        <dt>Trabajo previo</dt><dd>Camarera en Cheesecake Factory</dd>
+                                        <dt>Superpoder</dt><dd>Sentido común</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="card card--howard" id="howard">
+                            <img src="Imagenes/howard.webp" alt="Howard Wolowitz con la maqueta de un cohete, junto a un brazo robótico y un logo de la NASA" width="800" height="600" loading="lazy">
+                            <div class="card__body">
+                                <h2>Howard Wolowitz</h2>
+                                <p class="card__role">Ingeniero aeroespacial</p>
+                                <p class="card__desc">El único del grupo que viajó al espacio, y no deja que nadie lo olvide. Diseña equipos para la NASA y colecciona hebillas imposibles.</p>
+                                <button type="button" class="btn-quote" data-quote="Soy astronauta. Lo menciono por si no lo dije en los últimos cinco minutos.">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-howard">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-howard">
+                                    <dl class="facts">
+                                        <dt>Título</dt><dd>Máster del MIT, sin doctorado</dd>
+                                        <dt>Logro</dt><dd>Misión a la Estación Espacial Internacional</dd>
+                                        <dt>Marca registrada</dt><dd>Hebillas de cinturón imposibles</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="card card--raj" id="raj">
+                            <img src="Imagenes/raj.webp" alt="Rajesh Koothrappali con su perra Cinnamon en brazos, frente a un telescopio y la cúpula de un observatorio" width="800" height="600" loading="lazy">
+                            <div class="card__body">
+                                <h2>Dr. Rajesh Koothrappali</h2>
+                                <p class="card__role">Astrofísico</p>
+                                <p class="card__desc">Descubrió un objeto más allá de Neptuno y llora con las comedias románticas. Durante años no pudo hablarle a una mujer sin tomar algo.</p>
+                                <button type="button" class="btn-quote" data-quote="Las estrellas no te juzgan. Por eso me hice astrofísico.">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-raj">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-raj">
+                                    <dl class="facts">
+                                        <dt>Especialidad</dt><dd>Objetos del cinturón de Kuiper</dd>
+                                        <dt>Compañera</dt><dd>Cinnamon, su yorkshire</dd>
+                                        <dt>Origen</dt><dd>Nueva Delhi, India</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="card card--amy" id="amy">
+                            <img src="Imagenes/amy.webp" alt="Amy Farrah Fowler con una pipeta, junto a un microscopio y láminas del cerebro humano" width="800" height="600" loading="lazy">
+                            <div class="card__body">
+                                <h2>Dra. Amy Farrah Fowler</h2>
+                                <p class="card__role">Neurobióloga</p>
+                                <p class="card__desc">Estudia el cerebro humano de día y la mente de Sheldon el resto del tiempo. Conoció al amor de su vida gracias a una app de citas.</p>
+                                <button type="button" class="btn-quote" data-quote="Técnicamente, lo que sentís es una reacción química. Pero es una muy linda.">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-amy">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-amy">
+                                    <dl class="facts">
+                                        <dt>Especialidad</dt><dd>Neurobiología cognitiva</dd>
+                                        <dt>Instrumento</dt><dd>Arpa</dd>
+                                        <dt>Dato</dt><dd>Conoció a Sheldon por una app de citas</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li class="card card--bernadette" id="bernadette">
+                            <img src="Imagenes/bernadette.webp" alt="Bernadette Rostenkowski con guardapolvo y pipeta, frente a un microscopio y placas de Petri" width="800" height="600" loading="lazy">
+                            <div class="card__body">
+                                <h2>Dra. Bernadette Rostenkowski</h2>
+                                <p class="card__role">Microbióloga</p>
+                                <p class="card__desc">Manipula patógenos mortales en un laboratorio farmacéutico y es, por lejos, la más temida del grupo. Su voz dulce engaña a todos.</p>
+                                <button type="button" class="btn-quote" data-quote="Trabajo con virus que te matan en seis horas. No me hagas enojar.">Mostrar frase característica</button>
+
+                                <button type="button" class="card__toggle" aria-expanded="false" aria-controls="ficha-bernadette">
+                                    <span class="card__toggle-text">Ver ficha</span>
+                                    <span class="card__toggle-icon" aria-hidden="true">+</span>
+                                </button>
+                                <div class="card__extra" id="ficha-bernadette">
+                                    <dl class="facts">
+                                        <dt>Especialidad</dt><dd>Microbiología farmacéutica</dd>
+                                        <dt>Dato</dt><dd>Gana bastante más que Howard</dd>
+                                        <dt>Advertencia</dt><dd>No le levantes la voz</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <button type="button" id="btn-next" class="carousel__btn"
+                            aria-label="Personaje siguiente" aria-controls="carousel-track">
+                        <span aria-hidden="true">▶</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <!-- Mapa del sitio: orienta al usuario y le da al rastreador
+                 enlaces internos hacia cada página. -->
+            <nav class="sitemap" aria-label="Mapa del sitio">
+                <div>
+                    <h2>Páginas</h2>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="personajes.html">Personajes</a></li>
+                        <li><a href="temporadas.html">Temporadas</a></li>
+                        <li><a href="laboratorio.html">Laboratorio de pruebas</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2>Personajes</h2>
+                    <ul>
+                        <li><a href="personajes.html#sheldon">Dr. Sheldon Cooper</a></li>
+                        <li><a href="personajes.html#leonard">Dr. Leonard Hofstadter</a></li>
+                        <li><a href="personajes.html#penny">Penny</a></li>
+                        <li><a href="personajes.html#howard">Howard Wolowitz</a></li>
+                        <li><a href="personajes.html#raj">Dr. Rajesh Koothrappali</a></li>
+                        <li><a href="personajes.html#amy">Dra. Amy Farrah Fowler</a></li>
+                        <li><a href="personajes.html#bernadette">Dra. Bernadette Rostenkowski</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="footer__bottom">
+                <p>&copy; 2026 Alan Infante. Hecho con café, código limpio y conocimiento del multiverso.</p>
+                <p class="footer__legal">
+                    <small>Proyecto tributo sin fines de lucro. The Big Bang Theory y sus personajes
+                    son propiedad de Warner Bros. Television y Chuck Lorre Productions.</small>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- defer: se ejecuta con el HTML ya parseado. -->
+    <script src="./logic.js" defer></script>
+</body>
+</html>

@@ -26,14 +26,11 @@
     --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.18);
 
     /* Hero en modo normal: mismos colores que el resto de la página. */
-    --overlay-hero: rgba(248, 249, 250, 0.90);
+    --overlay-hero: rgba(248, 249, 250, 0.45); /* La imagen ya es clara: velo liviano. */
     --color-hero-eyebrow: #1f6f9e; /* Azul oscurecido: el de interfaz no llega a 4.5:1. */
     --color-hero-title: var(--color-text);
     --color-hero-text: var(--color-text-muted);
     --hero-text-shadow: none;      /* Sobre fondo claro solo ensuciaría. */
-    --hero-decoration: rgba(0, 0, 0, 0.05);
-
-    --overlay-page: rgba(0, 0, 0, 0.70);
     --watermark-opacity: 0;        /* Marca de agua apagada. */
 
     --font-heading: 'Space Grotesk', sans-serif;
@@ -63,14 +60,11 @@ body.lab-mode {
     --color-toast-bg: #0d1512;
     --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.45);
 
-    --overlay-hero: rgba(0, 0, 0, 0.70);
+    --overlay-hero: rgba(0, 0, 0, 0.35);      /* La imagen ya es oscura. */
     --color-hero-eyebrow: #7cf7c0;
     --color-hero-title: #ffffff;
     --color-hero-text: #dfe6e9;
     --hero-text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); /* Acá sí hace falta. */
-    --hero-decoration: rgba(124, 247, 192, 0.07);
-
-    --overlay-page: rgba(0, 0, 0, 0.86);
     --watermark-opacity: 0.16;
     --radius: 4px;                 /* Esquinas más duras. */
     --font-data: var(--font-mono);
@@ -110,22 +104,6 @@ body {
     transition: color var(--transition);
 }
 
-/* Fondo en pseudo-elementos fijos y no con background-attachment: iOS ignora
-   esa propiedad y en Android encarece cada scroll.
-   Orden: foto (-3) → velo oscuro (-2) → código (-1) → contenido. */
-body::before, body::after { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%; }
-
-body::before {
-    z-index: -3;
-    background: url('images/elenco-bg.webp') center / cover no-repeat;
-}
-
-body::after {
-    z-index: -2;
-    background-color: var(--overlay-page);
-    transition: background-color var(--transition);
-}
-
 h1, h2, h3 { font-family: var(--font-heading); line-height: 1.2; margin-bottom: 1rem; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
@@ -145,7 +123,7 @@ button { font: inherit; cursor: pointer; border: none; }
 /* --- 3. MARCA DE AGUA (solo modo laboratorio) --------------------------- */
 .code-watermark {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;              /* Encima del velo, debajo del contenido. */
+    z-index: -1;              /* Debajo del contenido. */
     overflow: hidden; pointer-events: none;
     font-family: var(--font-mono); font-size: 14px; line-height: 2;
     color: #00e28a; white-space: pre; /* Respeta los saltos de línea del HTML. */
@@ -172,6 +150,8 @@ button { font: inherit; cursor: pointer; border: none; }
 .nav__links { list-style: none; display: flex; gap: 2rem; }
 .nav__links a { color: var(--color-text); font-weight: 600; text-decoration: none; padding: 0.5rem 0; }
 .nav__links a:hover { color: var(--color-primary); }
+/* Página actual: color y subrayado, no solo color (WCAG 1.4.1). */
+.nav__links a[aria-current="page"] { color: var(--color-primary); border-bottom: 2px solid currentColor; }
 
 .btn-theme {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -195,12 +175,12 @@ button { font: inherit; cursor: pointer; border: none; }
 }
 
 .hero::before {
-    background-image: linear-gradient(var(--overlay-hero), var(--overlay-hero)), url('images/formulas-hero-1.webp');
+    background-image: linear-gradient(var(--overlay-hero), var(--overlay-hero)), url('Imagenes/hero-relatividad.webp');
 }
 
 .hero::after {
     opacity: 0; transition: opacity 0.6s ease;
-    background-image: linear-gradient(var(--overlay-hero), var(--overlay-hero)), url('images/formulas-hero-2.webp');
+    background-image: linear-gradient(var(--overlay-hero), var(--overlay-hero)), url('Imagenes/hero-relatividad-lab.webp');
 }
 .lab-mode .hero::after { opacity: 1; }
 
@@ -209,11 +189,6 @@ button { font: inherit; cursor: pointer; border: none; }
 .hero h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); color: var(--color-hero-title); text-shadow: var(--hero-text-shadow); }
 .hero__lead { color: var(--color-hero-text); font-size: 1.1rem; text-shadow: var(--hero-text-shadow); }
 
-.hero__decoration {
-    position: absolute; top: 8%; right: 4%; z-index: -1;
-    font-family: var(--font-heading); font-size: clamp(6rem, 18vw, 15rem);
-    color: var(--hero-decoration); pointer-events: none;
-}
 
 /* --- 6. BOTONES --------------------------------------------------------- */
 .btn-primary {
@@ -234,9 +209,11 @@ button { font: inherit; cursor: pointer; border: none; }
 /* --- 7. SECCIONES ------------------------------------------------------- */
 .section {
     padding: 6rem 0; background-color: var(--color-bg-section);
-    backdrop-filter: blur(6px); transition: background-color var(--transition);
+    transition: background-color var(--transition);
 }
-.section h2 { text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); }
+/* Título de sección con clase propia: un selector ".section h2" también
+   pintaría los h2 de adentro de cada tarjeta. */
+.section__title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); }
 .section__desc { text-align: center; max-width: 55ch; margin: 0 auto 4rem; color: var(--color-text-muted); }
 
 /* --- 8. CARRUSEL -------------------------------------------------------- */
@@ -277,10 +254,11 @@ button { font: inherit; cursor: pointer; border: none; }
 }
 
 .card img { width: 100%; height: 320px; object-fit: cover; object-position: top; }
-.card__body { padding: 2rem 1rem 1rem; }
-.card h3 { color: var(--color-text); margin-bottom: 0.25rem; font-size: 1.25rem; }
+.card__body { display: flex; flex-direction: column; padding: 2rem 1rem 1rem; }
+.card__body .btn-quote { align-self: center; } /* Centra solo el botón de frase. */
+.card h2 { color: var(--color-text); margin-bottom: 0.25rem; font-size: 1.25rem; }
 .card__role { color: var(--accent); font-family: var(--font-data); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
-.card__desc { color: var(--color-text-muted); }
+.card__desc { color: var(--color-text-muted); min-height: calc(1.6em * 3); } /* 3 líneas × line-height. */
 
 .card__toggle {
     display: flex; align-items: center; justify-content: space-between;
@@ -302,6 +280,59 @@ button { font: inherit; cursor: pointer; border: none; }
 .facts dt { font-size: 0.75rem; color: var(--accent); margin-top: 0.5rem; }
 .facts dd { color: var(--color-text-muted); }
 
+/* --- ACCESOS (INICIO) --------------------------------------------------- */
+.explore {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.explore__card {
+    display: block;
+    height: 100%;
+    padding: 2rem 1.5rem;
+    background-color: var(--color-bg-card);
+    border-top: 4px solid var(--color-secondary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    text-decoration: none;
+    text-align: center;
+    transition: transform var(--transition), background-color var(--transition);
+}
+.explore__card:hover, .explore__card:focus-visible { transform: translateY(-3px); }
+.explore__icon { display: block; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.explore__card h3 { color: var(--color-text); }
+.explore__card p { color: var(--color-text-muted); }
+
+/* --- TEMPORADAS ---------------------------------------------------------- */
+.seasons {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Columnas según el ancho, sin media queries. */
+    gap: 1.5rem;
+}
+
+.season {
+    padding: 1.5rem;
+    background-color: var(--color-bg-card);
+    border-left: 4px solid var(--color-secondary);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    transition: background-color var(--transition), border-color var(--transition);
+}
+
+.season h2 { color: var(--color-text); font-size: 1.15rem; margin-bottom: 0.25rem; }
+.season__meta { font-family: var(--font-data); font-size: 0.85rem; color: var(--color-text-muted); }
+
+.season summary {
+    margin-top: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+.season details p { margin-top: 0.5rem; color: var(--color-text-muted); font-size: 0.95rem; }
+
 /* --- 10. QUIZ ----------------------------------------------------------- */
 .quiz {
     max-width: 650px; margin: 0 auto; padding: clamp(1.5rem, 5vw, 3rem);
@@ -309,7 +340,9 @@ button { font: inherit; cursor: pointer; border: none; }
     border: 2px dashed var(--color-secondary); border-radius: var(--radius);
     transition: background-color var(--transition), border-color var(--transition);
 }
-.quiz h3 { font-size: 1.2rem; line-height: 1.4; color: var(--color-text); }
+.quiz__progress { font-family: var(--font-data); font-size: 0.85rem; color: var(--color-secondary); margin-bottom: 0.5rem; }
+.quiz h2:focus { outline: none; } /* El foco llega por código, no por Tab: no hace falta el anillo. */
+.quiz h2 { font-size: 1.2rem; line-height: 1.4; color: var(--color-text); }
 .quiz__options { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
 
 .btn-quiz {
@@ -343,8 +376,7 @@ button { font: inherit; cursor: pointer; border: none; }
 /* --- 12. FOOTER Y MAPA DEL SITIO ---------------------------------------- */
 .footer {
     padding: 4rem 0; background-color: var(--color-footer-bg);
-    color: var(--color-footer-text); border-top: 1px solid var(--color-border);
-    backdrop-filter: blur(6px); transition: background-color var(--transition);
+    color: var(--color-footer-text); border-top: 1px solid var(--color-border); transition: background-color var(--transition);
 }
 .footer__bottom { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
 .footer__legal { margin-top: 0.5rem; color: var(--color-footer-muted); }
@@ -362,8 +394,15 @@ button { font: inherit; cursor: pointer; border: none; }
 /* Las flechas se achican pero no se ocultan: en mobile serían el único
    control visible del carrusel. */
 @media (max-width: 600px) {
-    .carousel__btn { width: 38px; height: 38px; font-size: 0.9rem; }
     .nav { justify-content: center; }
+    /* El menú no entraba en 390 px y generaba scroll horizontal en toda la página. */
+    .nav__links { gap: 1.1rem; flex-wrap: wrap; justify-content: center; }
+
+    /* Las flechas bajan debajo del carrusel: al costado le robaban casi la
+       mitad del ancho y la tarjeta quedaba en unos 200 px. */
+    .carousel { flex-wrap: wrap; justify-content: center; }
+    .carousel__track { order: -1; flex-basis: 100%; }
+    .carousel__btn { width: 42px; height: 42px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
