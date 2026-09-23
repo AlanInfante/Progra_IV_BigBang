@@ -338,6 +338,20 @@ button { font: inherit; cursor: pointer; border: none; }
 }
 .season details p { margin-top: 0.5rem; color: var(--color-text-muted); font-size: 0.95rem; }
 
+/* --- FONDO DE PERSONAJES ------------------------------------------------- */
+/* Mismo criterio que Temporadas: imagen transparente a tamaño real arriba,
+   para que no se estire en pantallas altas y herede el color de la sección. */
+.section--personajes {
+    background-image: url('Imagenes/personajes.webp');
+    background-size: 1920px auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.lab-mode .section--personajes {
+    background-image: url('Imagenes/personajes-lab.webp');
+}
+
 /* --- FONDO DE TEMPORADAS ------------------------------------------------- */
 /* A diferencia del laboratorio, acá NO se usa cover: la página es muy alta
    y la imagen se estiraría hasta verse borrosa. Se muestra a tamaño real
