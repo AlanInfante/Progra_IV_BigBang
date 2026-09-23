@@ -32,6 +32,7 @@
     --color-hero-text: var(--color-text-muted);
     --hero-text-shadow: none;      /* Sobre fondo claro solo ensuciaría. */
     --watermark-opacity: 0;        /* Marca de agua apagada. */
+    --overlay-section: rgba(248, 249, 250, 0.35);
 
     --font-heading: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -66,6 +67,7 @@ body.lab-mode {
     --color-hero-text: #dfe6e9;
     --hero-text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6); /* Acá sí hace falta. */
     --watermark-opacity: 0.16;
+    --overlay-section: rgba(0, 0, 0, 0.30);
     --radius: 4px;                 /* Esquinas más duras. */
     --font-data: var(--font-mono);
 }
@@ -309,8 +311,11 @@ button { font: inherit; cursor: pointer; border: none; }
 .seasons {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Columnas según el ancho, sin media queries. */
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); /* Columnas según el ancho, sin media queries. */
     gap: 1.5rem;
+    /* Sin esto, todas las tarjetas de una fila copian la altura de la más
+       alta: al abrir un resumen, las vecinas quedan estiradas y vacías. */
+    align-items: start;
 }
 
 .season {
@@ -332,6 +337,69 @@ button { font: inherit; cursor: pointer; border: none; }
     color: var(--color-secondary);
 }
 .season details p { margin-top: 0.5rem; color: var(--color-text-muted); font-size: 0.95rem; }
+
+/* --- FONDO DE TEMPORADAS ------------------------------------------------- */
+/* A diferencia del laboratorio, acá NO se usa cover: la página es muy alta
+   y la imagen se estiraría hasta verse borrosa. Se muestra a tamaño real
+   arriba, detrás del título, y se desvanece sola porque es transparente.
+   Se usan propiedades sueltas y no el atajo "background:", que borraría el
+   background-color que la sección ya tiene. */
+.section--temporadas {
+    background-image: url('Imagenes/temporadas.webp');
+    background-size: 1920px auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+}
+
+.lab-mode .section--temporadas {
+    background-image: url('Imagenes/temporadas-lab.webp');
+}
+
+/* --- FONDO DEL LABORATORIO --------------------------------------------- */
+/* Mismo recurso que el hero: la imagen ya viene en el tono de cada modo, así
+   que el velo es liviano. Va sobre la sección y no sobre el body para que
+   solo la descargue quien entra a esta página. */
+.section--laboratorio {
+    min-height: calc(100vh - 5rem); /* Llena la pantalla: la imagen no queda cortada. */
+    background-image: linear-gradient(var(--overlay-section), var(--overlay-section)), url('Imagenes/laboratorio.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.lab-mode .section--laboratorio {
+    background-image: linear-gradient(var(--overlay-section), var(--overlay-section)), url('Imagenes/laboratorio-lab.webp');
+}
+
+/* --- GALERÍA POR TEMPORADA ---------------------------------------------- */
+/* Las miniaturas se ven siempre. Cada una lleva loading="lazy", así el
+   navegador descarga solo las que entran en pantalla mientras se baja. */
+.gallery {
+    list-style: none;
+    display: grid;
+    /* Mosaico: la primera foto ocupa el ancho completo de la tarjeta y las
+       otras dos van debajo, a la mitad. Con tres columnas iguales las
+       miniaturas quedaban de 67 px, ilegibles. */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.4rem;
+    margin-top: 1rem;
+}
+
+.gallery li:first-child { grid-column: span 2; }
+
+.gallery img {
+    width: 100%;
+    /* height: auto anula el height="600" del HTML. Sin esto el navegador
+       toma ese atributo como altura real y la miniatura sale angosta y
+       larguísima, recortando una franja vertical de la foto. */
+    height: auto;
+    aspect-ratio: 4 / 3;   /* Reserva el espacio antes de cargar: el layout no salta. */
+    object-fit: cover;
+    display: block;
+    border-radius: 4px;
+    transition: opacity var(--transition);
+}
+
+.gallery a:hover img, .gallery a:focus-visible img { opacity: 0.75; }
 
 /* --- 10. QUIZ ----------------------------------------------------------- */
 .quiz {

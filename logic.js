@@ -243,7 +243,19 @@ if (elPregunta) {
 }
 
 
-/* 6. CÓDIGO SECRETO: escribir "emc2" */
+/* 6. GALERÍAS
+   GLightbox se carga por CDN y puede fallar (sin internet, CDN caído). Si no
+   está, los links siguen funcionando: abren la imagen sola. Mejora progresiva. */
+if (window.GLightbox && document.querySelector('.glightbox')) {
+    GLightbox({
+        selector: '.glightbox',
+        loop: true,          // Después de la última, vuelve a la primera.
+        touchNavigation: true
+    });
+}
+
+
+/* 7. CÓDIGO SECRETO: escribir "emc2" */
 let teclas = '';
 document.addEventListener('keydown', (e) => {
     if (e.key.length !== 1) return; // Descarta Shift, Enter, F5, etc.
