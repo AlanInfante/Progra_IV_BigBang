@@ -1,0 +1,6 @@
+# Permite que cualquier buscador recorra el sitio completo.
+User-agent: *
+Allow: /
+
+# La ruta absoluta al sitemap es como lo encuentran sin darlo de alta a mano.
+Sitemap: https://alaninfante.github.io/Progra_IV_BigBang/sitemap.xml

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Lista de páginas para los buscadores. Actualizá <lastmod> cuando cambies
+     el contenido. Va en la raíz del sitio, al lado de index.html. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://alaninfante.github.io/Progra_IV_BigBang/</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://alaninfante.github.io/Progra_IV_BigBang/personajes.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://alaninfante.github.io/Progra_IV_BigBang/temporadas.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://alaninfante.github.io/Progra_IV_BigBang/laboratorio.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://alaninfante.github.io/Progra_IV_BigBang/sobre-nosotros.html</loc>
+    <lastmod>2026-09-23</lastmod>
+    <priority>0.5</priority>
+  </url>
+</urlset>

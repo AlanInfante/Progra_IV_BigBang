@@ -6,8 +6,8 @@
 
     <!-- SEO propio de esta página: título (≤ 60 caracteres, si no Google lo
          corta), descripción y URL únicos. -->
-    <title>Quiz de The Big Bang Theory y física | TBBT Universe</title>
-    <meta name="description" content="Seis preguntas sobre física y sobre The Big Bang Theory. Poné a prueba si estás a la altura del apartamento 4A.">
+    <title>Laboratorio: quiz y enigmas | The Big Bang Theory</title>
+    <meta name="description" content="Cuatro desafíos: un quiz de física, una terminal interactiva, el juego de Sheldon y un enigma de lógica con solución única.">
     <meta name="theme-color" content="#1a1a1a">
     <!-- Favicon en SVG embebido: sin archivo extra y sin el error 404 que el
          navegador genera al pedir /favicon.ico. Google lo muestra en resultados. -->
@@ -16,17 +16,31 @@
 
     <meta property="og:type" content="website">
     <meta property="og:locale" content="es_AR">
-    <meta property="og:site_name" content="TBBT Universe">
-    <meta property="og:title" content="Quiz de The Big Bang Theory y física | TBBT Universe">
-    <meta property="og:description" content="Seis preguntas sobre física y sobre The Big Bang Theory. Poné a prueba si estás a la altura del apartamento 4A.">
+    <meta property="og:site_name" content="The Big Bang Theory">
+    <meta property="og:title" content="Laboratorio: quiz y enigmas | The Big Bang Theory">
+    <meta property="og:description" content="Un quiz de física, una terminal interactiva, piedra-papel-tijera-lagarto-Spock y un enigma de lógica.">
     <meta property="og:url" content="https://alaninfante.github.io/Progra_IV_BigBang/laboratorio.html">
     <meta property="og:image" content="https://alaninfante.github.io/Progra_IV_BigBang/Imagenes/hero-relatividad.webp">
+    <meta property="og:image:alt" content="Ilustración del espacio-tiempo curvado, fondo del sitio">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://alaninfante.github.io/Progra_IV_BigBang/Imagenes/hero-relatividad.webp">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
+    <!-- Migas de pan para Google: le muestran dónde está esta página dentro
+         del sitio y puede dibujar la ruta en el resultado de búsqueda. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://alaninfante.github.io/Progra_IV_BigBang/" },
+        { "@type": "ListItem", "position": 2, "name": "Laboratorio", "item": "https://alaninfante.github.io/Progra_IV_BigBang/laboratorio.html" }
+      ]
+    }
+    </script>
 </head>
 <body>
     <!-- Aplica el modo guardado ANTES de que se dibuje la página. Si esperara
@@ -43,7 +57,7 @@
     <header class="header">
         <nav class="nav" aria-label="Navegación principal">
             <a class="logo" href="index.html">
-                <span aria-hidden="true">⚛️</span> TBBT Universe
+                <span aria-hidden="true">⚛️</span> The Big Bang Theory
             </a>
 
             <!-- aria-current marca la página actual: lo usa el lector de
@@ -53,6 +67,7 @@
                 <li><a href="personajes.html">Personajes</a></li>
                 <li><a href="temporadas.html">Temporadas</a></li>
                 <li><a href="laboratorio.html" aria-current="page">Laboratorio</a></li>
+                <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
             </ul>
 
             <!-- aria-pressed comunica el estado del botón al lector de pantalla. -->
@@ -63,13 +78,14 @@
         </nav>
     </header>
 
-    <main id="contenido">
+    <main id="contenido" class="fondo-laboratorio">
         <!-- ===== QUIZ ===== -->
-        <section id="laboratorio" class="section section--laboratorio">
+        <section id="laboratorio" class="section">
             <div class="container">
-                <h1 class="section__title">El laboratorio de pruebas</h1>
+                <p class="section__eyebrow">El laboratorio de pruebas</p>
+                <h1 class="section__title">Quiz y juegos de The Big Bang Theory</h1>
 
-                <p class="section__desc">Seis preguntas de ciencia y de la serie. ¿Estás a la altura del apartamento 4A?</p>
+                <p class="section__desc">Cuatro desafíos: un quiz de ciencia, una terminal, el juego de Sheldon y un enigma de lógica. ¿Estás a la altura del apartamento 4A?</p>
 
                 <!-- El contenido de las preguntas vive en el JS, en un arreglo.
                      El HTML solo define dónde se muestra cada parte. -->
@@ -91,6 +107,104 @@
                 </div>
             </div>
         </section>
+        <!-- ===== TERMINAL ===== -->
+        <section id="terminal" class="section">
+            <div class="container">
+                <h2 class="section__title">Terminal del 4A</h2>
+                <p class="section__desc">Escribí un comando y presioná Enter. Empezá por <code>ayuda</code>. Hay varios que no están en la lista.</p>
+
+                <!-- La salida es un live region: quien use lector de pantalla
+                     escucha la respuesta sin tener que ir a buscarla. -->
+                <div class="terminal">
+                    <ol id="term-salida" class="terminal__salida" role="log" aria-live="polite"></ol>
+
+                    <div class="terminal__linea">
+                        <label for="term-entrada" class="terminal__prompt">invitado@4A:~$</label>
+                        <input type="text" id="term-entrada" autocomplete="off" spellcheck="false"
+                               aria-describedby="term-ayuda">
+                    </div>
+                    <p id="term-ayuda" class="terminal__pista">Flecha arriba repite el último comando.</p>
+                </div>
+
+                <noscript><p>La terminal necesita JavaScript activado.</p></noscript>
+            </div>
+        </section>
+
+        <!-- ===== JUEGO ===== -->
+        <section id="juego" class="section">
+            <div class="container">
+                <h2 class="section__title">Piedra, papel, tijera, lagarto, Spock</h2>
+                <p class="section__desc">La versión ampliada que juega Sheldon. Con cinco opciones el empate es menos probable: cada jugada gana dos y pierde dos.</p>
+
+                <div class="juego">
+                    <div class="juego__opciones" id="juego-opciones" role="group" aria-label="Elegí tu jugada">
+                        <button type="button" class="btn-juego" data-jugada="piedra"><span aria-hidden="true">✊</span> Piedra</button>
+                        <button type="button" class="btn-juego" data-jugada="papel"><span aria-hidden="true">✋</span> Papel</button>
+                        <button type="button" class="btn-juego" data-jugada="tijera"><span aria-hidden="true">✌️</span> Tijera</button>
+                        <button type="button" class="btn-juego" data-jugada="lagarto"><span aria-hidden="true">🦎</span> Lagarto</button>
+                        <button type="button" class="btn-juego" data-jugada="spock"><span aria-hidden="true">🖖</span> Spock</button>
+                    </div>
+
+                    <p id="juego-resultado" class="juego__resultado" role="status" aria-live="polite"></p>
+                    <p id="juego-marcador" class="juego__marcador">Vos 0 &ndash; 0 La computadora</p>
+
+                    <details class="juego__reglas">
+                        <summary>Las diez reglas</summary>
+                        <ul>
+                            <li>La tijera corta el papel.</li>
+                            <li>El papel envuelve la piedra.</li>
+                            <li>La piedra aplasta el lagarto.</li>
+                            <li>El lagarto envenena a Spock.</li>
+                            <li>Spock rompe la tijera.</li>
+                            <li>La tijera decapita al lagarto.</li>
+                            <li>El lagarto se come el papel.</li>
+                            <li>El papel refuta a Spock.</li>
+                            <li>Spock vaporiza la piedra.</li>
+                            <li>La piedra parte la tijera.</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ENIGMA ===== -->
+        <section id="enigma" class="section">
+            <div class="container">
+                <h2 class="section__title">El enigma de la noche de comida</h2>
+                <p class="section__desc">Los cinco pidieron un plato distinto y tomaron una bebida distinta. Con estas nueve pistas alcanza para deducir quién pidió qué. No hay que adivinar: la solución es única.</p>
+
+                <div class="enigma">
+                    <ol class="enigma__pistas">
+                        <li>Penny acompañó su plato con gaseosa.</li>
+                        <li>Leonard tomó cerveza.</li>
+                        <li>Howard pidió sushi o empanadas.</li>
+                        <li>Quien pidió sushi tomó té.</li>
+                        <li>Quien pidió empanadas tomó vino.</li>
+                        <li>Raj no pidió pizza ni tailandesa.</li>
+                        <li>Penny pidió hamburguesa o pizza.</li>
+                        <li>Raj no come pescado crudo.</li>
+                        <li>Quien pidió pizza tomó cerveza.</li>
+                    </ol>
+
+                    <table class="enigma__tabla">
+                        <caption>Completá la tabla y comprobá</caption>
+                        <thead>
+                            <tr><th scope="col">Personaje</th><th scope="col">Comida</th><th scope="col">Bebida</th></tr>
+                        </thead>
+                        <tbody id="enigma-cuerpo"></tbody>
+                    </table>
+
+                    <div class="enigma__acciones">
+                        <button type="button" id="enigma-comprobar" class="btn-quote">Comprobar</button>
+                        <button type="button" id="enigma-rendirse" class="btn-quote">Ver la solución</button>
+                    </div>
+
+                    <p id="enigma-resultado" class="enigma__resultado" role="status" aria-live="polite"></p>
+                </div>
+
+                <noscript><p>El enigma necesita JavaScript activado.</p></noscript>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
@@ -105,6 +219,7 @@
                         <li><a href="personajes.html">Personajes</a></li>
                         <li><a href="temporadas.html">Temporadas</a></li>
                         <li><a href="laboratorio.html">Laboratorio de pruebas</a></li>
+                        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
                     </ul>
                 </div>
 

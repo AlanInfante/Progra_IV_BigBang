@@ -262,3 +262,252 @@ document.addEventListener('keydown', (e) => {
     teclas = (teclas + e.key.toLowerCase()).slice(-4); // Últimas 4 letras.
     if (teclas === 'emc2') mostrarAviso('Descubriste el conocimiento del universo.');
 });
+
+/* 7. TERMINAL
+   Los comandos viven en un objeto: agregar uno es sumar una clave, sin tocar
+   la lógica. Cada respuesta se inserta con textContent, así lo que escriba el
+   visitante nunca puede ejecutarse como HTML. */
+const termEntrada = document.getElementById('term-entrada');
+
+if (termEntrada) {
+    const termSalida = document.getElementById('term-salida');
+
+    const COMANDOS = {
+        ayuda: () => 'Comandos: whoami, proyecto, stack, ellos, sheldon, 73, bazinga, limpiar. Hay otros escondidos.',
+        whoami: () => 'invitado. Sin privilegios, como Howard en el laboratorio de Sheldon.',
+        proyecto: () => 'Sitio tributo a The Big Bang Theory. Trabajo práctico de Programación IV, UTN Haedo.',
+        stack: () => 'HTML5, CSS3 y JavaScript sin frameworks. Una sola librería externa: GLightbox.',
+        ellos: () => 'Siete personas, cuatro doctorados, un máster y un lugar innegociable en el sofá.',
+        sheldon: () => 'Ese lugar está ocupado. Siempre lo estuvo.',
+        73: () => 'El 73 es el primo número 21. Su espejo, el 37, es el primo 12. Y 21 = 7 x 3.',
+        bazinga: () => 'Caíste en mi trampa clásica de humor.',
+        limpiar: () => { termSalida.textContent = ''; return null; },
+        clear: () => COMANDOS.limpiar(),
+        // Escondidos: no aparecen en la ayuda, premian al que prueba.
+        sudo: () => 'Con gran poder viene una gran factura de electricidad.',
+        'rm -rf /': () => 'Buen intento. Este servidor es de solo lectura.',
+        penny: () => 'Toc, toc, toc. Toc, toc, toc. Toc, toc, toc.',
+        hola: () => 'Hola. Probá con "ayuda".',
+        physics: () => 'La física no miente. Los físicos, a veces.',
+        'e=mc2': () => 'Energía y masa son la misma cosa vista de dos maneras.'
+    };
+
+    const escribir = (texto, clase) => {
+        const li = document.createElement('li');
+        li.className = clase;
+        li.textContent = texto;
+        termSalida.appendChild(li);
+        termSalida.scrollTop = termSalida.scrollHeight; // Siempre a la vista.
+    };
+
+    let ultimo = '';
+
+    termEntrada.addEventListener('keydown', (e) => {
+        // Flecha arriba: repite el último comando, como una terminal de verdad.
+        if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            termEntrada.value = ultimo;
+            return;
+        }
+        if (e.key !== 'Enter') return;
+
+        const texto = termEntrada.value.trim().toLowerCase();
+        termEntrada.value = '';
+        if (!texto) return;
+
+        ultimo = texto;
+        escribir('invitado@4A:~$ ' + texto, 'terminal__eco');
+
+        const respuesta = COMANDOS[texto];
+        if (respuesta) {
+            const salida = respuesta();
+            if (salida) escribir(salida, 'terminal__ok');
+        } else {
+            escribir(`comando no encontrado: ${texto}. Probá "ayuda".`, 'terminal__error');
+        }
+    });
+
+    escribir('Terminal del apartamento 4A. Escribí "ayuda" para empezar.', 'terminal__ok');
+}
+
+
+/* 8. PIEDRA, PAPEL, TIJERA, LAGARTO, SPOCK
+   A cada jugada se le listan las dos que les gana, con el verbo de la regla.
+   Con esa tabla alcanza: si la jugada rival está en la lista, ganaste. */
+const juegoOpciones = document.getElementById('juego-opciones');
+
+if (juegoOpciones) {
+    const GANA = {
+        piedra:  { tijera: 'parte', lagarto: 'aplasta' },
+        papel:   { piedra: 'envuelve', spock: 'refuta' },
+        tijera:  { papel: 'corta', lagarto: 'decapita' },
+        lagarto: { spock: 'envenena', papel: 'se come' },
+        spock:   { tijera: 'rompe', piedra: 'vaporiza' }
+    };
+    const JUGADAS = Object.keys(GANA);
+
+    const elResultado = document.getElementById('juego-resultado');
+    const elMarcador = document.getElementById('juego-marcador');
+    let vos = 0, maquina = 0;
+
+    juegoOpciones.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-juego');
+        if (!btn) return;
+
+        const mia = btn.dataset.jugada;
+        const suya = JUGADAS[Math.floor(Math.random() * JUGADAS.length)];
+
+        let texto;
+        if (mia === suya) {
+            texto = `Empate: los dos eligieron ${mia}.`;
+        } else if (GANA[mia][suya]) {
+            vos++;
+            texto = `Ganaste: ${mia} ${GANA[mia][suya]} ${suya}.`;
+        } else {
+            maquina++;
+            texto = `Perdiste: ${suya} ${GANA[suya][mia]} ${mia}.`;
+        }
+
+        elResultado.textContent = texto;
+        elMarcador.textContent = `Vos ${vos} – ${maquina} La computadora`;
+    });
+}
+
+
+/* 9. ENIGMA DE LÓGICA
+   La solución está acá y no en el HTML: dejarla en el marcado sería regalarla
+   a cualquiera que abra el inspector. Igual es un juego, no un secreto real. */
+const enigmaCuerpo = document.getElementById('enigma-cuerpo');
+
+if (enigmaCuerpo) {
+    const SOLUCION = {
+        Sheldon: ['tailandesa', 'agua'],
+        Leonard: ['pizza', 'cerveza'],
+        Penny: ['hamburguesa', 'gaseosa'],
+        Howard: ['sushi', 'té'],
+        Raj: ['empanadas', 'vino']
+    };
+    const COMIDAS = ['tailandesa', 'pizza', 'sushi', 'hamburguesa', 'empanadas'];
+    const BEBIDAS = ['agua', 'cerveza', 'vino', 'té', 'gaseosa'];
+
+    const armarSelect = (opciones, persona, tipo) => {
+        const select = document.createElement('select');
+        select.dataset.persona = persona;
+        select.dataset.tipo = tipo;
+        // Etiqueta accesible: sin esto el lector de pantalla lee "lista" sin decir de qué.
+        select.setAttribute('aria-label', `${tipo} de ${persona}`);
+        select.appendChild(new Option('—', ''));
+        opciones.forEach((o) => select.appendChild(new Option(o, o)));
+        return select;
+    };
+
+    Object.keys(SOLUCION).forEach((persona) => {
+        const fila = document.createElement('tr');
+        const th = document.createElement('th');
+        th.scope = 'row';
+        th.textContent = persona;
+        fila.appendChild(th);
+
+        [[COMIDAS, 'comida'], [BEBIDAS, 'bebida']].forEach(([ops, tipo]) => {
+            const td = document.createElement('td');
+            td.appendChild(armarSelect(ops, persona, tipo));
+            fila.appendChild(td);
+        });
+
+        enigmaCuerpo.appendChild(fila);
+    });
+
+    const selects = enigmaCuerpo.querySelectorAll('select');
+    const elEnigma = document.getElementById('enigma-resultado');
+
+    document.getElementById('enigma-comprobar').addEventListener('click', () => {
+        let correctas = 0, vacias = 0;
+
+        selects.forEach((s) => {
+            const esperado = SOLUCION[s.dataset.persona][s.dataset.tipo === 'comida' ? 0 : 1];
+            if (!s.value) vacias++;
+            else if (s.value === esperado) correctas++;
+        });
+
+        if (vacias) {
+            elEnigma.textContent = `Te faltan ${vacias} casilleros por completar.`;
+            return;
+        }
+        // Se dice cuántas están bien, no cuáles: si marcara cada una, el
+        // enigma se resolvería probando en vez de razonando.
+        elEnigma.textContent = correctas === selects.length
+            ? '¡Resuelto! Las diez casillas correctas. Amy estaría orgullosa.'
+            : `${correctas} de ${selects.length} correctas. Volvé a mirar las pistas 3, 4 y 5.`;
+    });
+
+    document.getElementById('enigma-rendirse').addEventListener('click', () => {
+        selects.forEach((s) => {
+            s.value = SOLUCION[s.dataset.persona][s.dataset.tipo === 'comida' ? 0 : 1];
+        });
+        elEnigma.textContent = 'Esta era la única combinación posible con esas nueve pistas.';
+    });
+}
+
+
+/* 10. FORMULARIO DE CONTACTO
+   El sitio es estático: no hay servidor que reciba el formulario. Al enviar
+   se arma un correo con los datos y se abre el programa de mail del visitante.
+   Si más adelante querés recibirlos sin abrir el mail, hace falta un servicio
+   externo (Formspree, Netlify Forms) o un backend propio. */
+const formContacto = document.getElementById('form-contacto');
+
+if (formContacto) {
+    const DESTINO = 'tucorreo@ejemplo.com';   // <-- cambiá esto por tu dirección
+
+    // Una de estas preguntas se sortea al cargar. No es seguridad real: frena
+    // bots simples, no a alguien decidido.
+    const PREGUNTAS = [
+        { texto: '¿Cuántas veces golpea Sheldon la puerta antes de decir un nombre?', ok: ['3', 'tres'] },
+        { texto: 'En E = mc², ¿qué letra representa la velocidad de la luz?', ok: ['c'] },
+        { texto: '¿Qué le gana al papel: la tijera o la piedra?', ok: ['tijera', 'la tijera'] }
+    ];
+    const pregunta = PREGUNTAS[Math.floor(Math.random() * PREGUNTAS.length)];
+    document.getElementById('f-humano-pista').textContent = pregunta.texto;
+
+    const estado = document.getElementById('form-estado');
+
+    const marcarError = (campo, mensaje) => {
+        campo.setAttribute('aria-invalid', 'true');
+        campo.classList.add('is-error');
+        estado.textContent = mensaje;
+        campo.focus();   // El foco va al primer campo con problema.
+    };
+
+    formContacto.addEventListener('submit', (e) => {
+        e.preventDefault();   // Sin esto el navegador recargaría la página.
+
+        const nombre = document.getElementById('f-nombre');
+        const email = document.getElementById('f-email');
+        const mensaje = document.getElementById('f-mensaje');
+        const humano = document.getElementById('f-humano');
+        const asunto = document.getElementById('f-asunto');
+
+        [nombre, email, mensaje, humano].forEach((c) => {
+            c.removeAttribute('aria-invalid');
+            c.classList.remove('is-error');
+        });
+
+        if (!nombre.value.trim()) return marcarError(nombre, 'Nos falta tu nombre.');
+        // Validación mínima: un @ con algo antes y un punto después. Comprobar
+        // de verdad si un correo existe solo se puede mandándole un mensaje.
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) return marcarError(email, 'Ese correo no parece válido.');
+        if (mensaje.value.trim().length < 10) return marcarError(mensaje, 'Contanos un poco más: al menos 10 caracteres.');
+        if (!pregunta.ok.includes(humano.value.trim().toLowerCase())) {
+            return marcarError(humano, 'Esa no es. Pista: la respuesta está en este sitio.');
+        }
+
+        // encodeURIComponent escapa los caracteres que romperían la dirección
+        // (saltos de línea, &, acentos).
+        const cuerpo = `Nombre: ${nombre.value}\nCorreo: ${email.value}\n\n${mensaje.value}`;
+        window.location.href = `mailto:${DESTINO}?subject=${encodeURIComponent('[TBBT Universe] ' + asunto.value)}&body=${encodeURIComponent(cuerpo)}`;
+
+        estado.textContent = 'Listo: se abrió tu programa de correo con el mensaje cargado.';
+        formContacto.reset();
+        document.getElementById('f-humano-pista').textContent = pregunta.texto;
+    });
+}

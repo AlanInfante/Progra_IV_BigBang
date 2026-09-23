@@ -210,13 +210,14 @@ button { font: inherit; cursor: pointer; border: none; }
 
 /* --- 7. SECCIONES ------------------------------------------------------- */
 .section {
-    padding: 6rem 0; background-color: var(--color-bg-section);
+    padding: 3.5rem 0;   /* Antes 6rem: demasiado aire entre secciones. */ background-color: var(--color-bg-section);
     transition: background-color var(--transition);
 }
 /* Título de sección con clase propia: un selector ".section h2" también
    pintaría los h2 de adentro de cada tarjeta. */
+.section__eyebrow { text-align: center; font-family: var(--font-data); font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-secondary); margin-bottom: 0.4rem; }
 .section__title { text-align: center; font-size: clamp(1.8rem, 4vw, 2.5rem); }
-.section__desc { text-align: center; max-width: 55ch; margin: 0 auto 4rem; color: var(--color-text-muted); }
+.section__desc { text-align: center; max-width: 55ch; margin: 0 auto 2rem; color: var(--color-text-muted); }
 
 /* --- 8. CARRUSEL -------------------------------------------------------- */
 .carousel { display: flex; align-items: center; gap: 1rem; }
@@ -338,6 +339,11 @@ button { font: inherit; cursor: pointer; border: none; }
 }
 .season details p { margin-top: 0.5rem; color: var(--color-text-muted); font-size: 0.95rem; }
 
+/* Aire extra solo donde el fondo tiene dibujo arriba del título. */
+.section--personajes, .section--temporadas,
+.fondo-laboratorio > .section:first-child,
+.fondo-sobre > .section:first-child { padding-top: 7rem; }
+
 /* --- FONDO DE PERSONAJES ------------------------------------------------- */
 /* Mismo criterio que Temporadas: imagen transparente a tamaño real arriba,
    para que no se estire en pantallas altas y herede el color de la sección. */
@@ -369,20 +375,37 @@ button { font: inherit; cursor: pointer; border: none; }
     background-image: url('Imagenes/temporadas-lab.webp');
 }
 
-/* --- FONDO DEL LABORATORIO --------------------------------------------- */
-/* Mismo recurso que el hero: la imagen ya viene en el tono de cada modo, así
-   que el velo es liviano. Va sobre la sección y no sobre el body para que
-   solo la descargue quien entra a esta página. */
-.section--laboratorio {
-    min-height: calc(100vh - 5rem); /* Llena la pantalla: la imagen no queda cortada. */
-    background-image: linear-gradient(var(--overlay-section), var(--overlay-section)), url('Imagenes/laboratorio.webp');
-    background-size: cover;
-    background-position: center;
+/* --- FONDO DE SOBRE NOSOTROS -------------------------------------------- */
+/* Mismo patrón que el laboratorio: una sola imagen larga en el <main>, con
+   las secciones transparentes para no taparla. */
+.fondo-sobre {
+    background-color: var(--color-bg-section);
+    background-image: url('Imagenes/sobre.webp');
+    background-size: 1920px auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+    transition: background-color var(--transition);
 }
 
-.lab-mode .section--laboratorio {
-    background-image: linear-gradient(var(--overlay-section), var(--overlay-section)), url('Imagenes/laboratorio-lab.webp');
+.lab-mode .fondo-sobre { background-image: url('Imagenes/sobre-lab.webp'); }
+.fondo-sobre .section { background-color: transparent; }
+
+/* --- FONDO DEL LABORATORIO ---------------------------------------------- */
+/* Va en el <main> y no en cada sección: una sola imagen larga detrás de los
+   cuatro juegos, en vez de repetirse cuatro veces.
+   El color de fondo se muda acá y las secciones quedan transparentes, porque
+   si no taparían la imagen con su propio color. */
+.fondo-laboratorio {
+    background-color: var(--color-bg-section);
+    background-image: url('Imagenes/laboratorio.webp');
+    background-size: 1920px auto;   /* Tamaño real: con cover se deformaría. */
+    background-position: top center;
+    background-repeat: no-repeat;
+    transition: background-color var(--transition);
 }
+
+.lab-mode .fondo-laboratorio { background-image: url('Imagenes/laboratorio-lab.webp'); }
+.fondo-laboratorio .section { background-color: transparent; }
 
 /* --- GALERÍA POR TEMPORADA ---------------------------------------------- */
 /* Las miniaturas se ven siempre. Cada una lleva loading="lazy", así el
@@ -402,9 +425,8 @@ button { font: inherit; cursor: pointer; border: none; }
 
 .gallery img {
     width: 100%;
-    /* height: auto anula el height="600" del HTML. Sin esto el navegador
-       toma ese atributo como altura real y la miniatura sale angosta y
-       larguísima, recortando una franja vertical de la foto. */
+    /* height: auto anula el height="600" del HTML. Sin esto el navegador toma
+       ese atributo como altura real y la foto sale angosta y larguísima. */
     height: auto;
     aspect-ratio: 4 / 3;   /* Reserva el espacio antes de cargar: el layout no salta. */
     object-fit: cover;
@@ -444,6 +466,102 @@ button { font: inherit; cursor: pointer; border: none; }
 /* min-height reserva el espacio para que el layout no salte al responder. */
 .quiz__result { margin-top: 2rem; min-height: 1.6em; color: var(--color-text); font-weight: 600; }
 
+/* --- SOBRE NOSOTROS ------------------------------------------------------ */
+.sobre { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; align-items: start; }
+.sobre article { padding: 1.75rem; background-color: var(--color-bg-card); border-top: 4px solid var(--color-secondary); border-radius: var(--radius); box-shadow: var(--shadow-card); }
+.sobre h2 { color: var(--color-text); font-size: 1.3rem; }
+.sobre p { color: var(--color-text-muted); margin-bottom: 1rem; }
+.sobre__rol { font-family: var(--font-data); font-weight: 600; color: var(--color-secondary); margin-bottom: 1rem; }
+.sobre .facts { margin-bottom: 1.5rem; }
+.sobre__firma { font-family: var(--font-data); color: var(--color-secondary); font-weight: 600; margin-bottom: 0; }
+
+/* --- TERMINAL ------------------------------------------------------------ */
+/* Colores propios y no los del tema: una terminal clara no se leería como
+   terminal. Se mantienen en los dos modos a propósito. */
+.terminal {
+    max-width: 800px; margin-inline: auto; padding: 1.25rem;
+    background: #0d1512; border: 1px solid #21c08b; border-radius: var(--radius);
+    font-family: var(--font-mono); font-size: 0.95rem; color: #d7ffe9;
+}
+.terminal__salida { list-style: none; max-height: 260px; overflow-y: auto; margin-bottom: 0.75rem; }
+.terminal__salida li { padding: 0.15rem 0; word-break: break-word; }
+.terminal__eco { color: #6f9a8a; }
+.terminal__ok { color: #7cf7c0; }
+.terminal__error { color: #ff9b9b; }
+
+.terminal__linea { display: flex; align-items: center; gap: 0.5rem; border-top: 1px solid #1d3a30; padding-top: 0.75rem; }
+.terminal__prompt { color: #21c08b; white-space: nowrap; }
+.terminal__linea input {
+    flex: 1; background: transparent; border: none; color: #d7ffe9;
+    font: inherit; padding: 0.25rem;
+}
+.terminal__linea input:focus { outline: 2px solid #7cf7c0; outline-offset: 2px; }
+.terminal__pista { margin-top: 0.5rem; font-size: 0.8rem; color: #6f9a8a; }
+
+/* --- JUEGO --------------------------------------------------------------- */
+.juego { max-width: 720px; margin-inline: auto; text-align: center; }
+.juego__opciones { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+.btn-juego {
+    padding: 0.8rem 1.2rem; background: var(--color-bg-card); color: var(--color-text);
+    border: 2px solid var(--color-secondary); border-radius: var(--radius); font-weight: 600;
+    transition: background-color var(--transition), color var(--transition);
+}
+.btn-juego:hover { background: var(--color-secondary); color: #fff; }
+/* min-height reserva el renglón: sin esto el marcador salta al primer tiro. */
+.juego__resultado { min-height: 1.6em; margin-top: 1.5rem; font-weight: 600; color: var(--color-text); }
+.juego__marcador { font-family: var(--font-data); color: var(--color-text-muted); }
+.juego__reglas { margin-top: 1.5rem; text-align: left; }
+.juego__reglas summary { cursor: pointer; font-weight: 600; color: var(--color-secondary); }
+.juego__reglas ul { margin-top: 0.75rem; padding-left: 1.2rem; color: var(--color-text-muted); columns: 2; column-gap: 2rem; }
+
+/* --- ENIGMA -------------------------------------------------------------- */
+.enigma { max-width: 820px; margin-inline: auto; }
+.enigma__pistas { padding-left: 1.4rem; color: var(--color-text-muted); margin-bottom: 2rem; }
+.enigma__pistas li { margin-bottom: 0.35rem; }
+.enigma__tabla { width: 100%; border-collapse: collapse; background: var(--color-bg-card); border-radius: var(--radius); overflow: hidden; }
+.enigma__tabla caption { text-align: left; padding-bottom: 0.5rem; color: var(--color-text-muted); font-size: 0.9rem; }
+.enigma__tabla th, .enigma__tabla td { padding: 0.6rem 0.8rem; text-align: left; border-bottom: 1px solid var(--color-border); }
+.enigma__tabla thead th { font-family: var(--font-data); font-size: 0.85rem; color: var(--color-secondary); }
+.enigma__tabla tbody th { color: var(--color-text); }
+.enigma__tabla select { width: 100%; padding: 0.4rem; font: inherit; background: var(--color-bg-section); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 4px; }
+.enigma__acciones { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+.enigma__resultado { min-height: 1.6em; margin-top: 1rem; font-weight: 600; color: var(--color-text); }
+
+@media (max-width: 600px) { .juego__reglas ul { columns: 1; } }
+
+/* --- FORMULARIO ---------------------------------------------------------- */
+.form { max-width: 760px; margin-inline: auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.form__campo { display: flex; flex-direction: column; gap: 0.35rem; }
+.form__campo--ancho { grid-column: 1 / -1; }
+.form label { font-weight: 600; color: var(--color-text); font-size: 0.95rem; }
+.form input, .form select, .form textarea {
+    padding: 0.7rem; font: inherit;
+    background: var(--color-bg-card); color: var(--color-text);
+    border: 2px solid var(--color-border); border-radius: var(--radius);
+}
+.form textarea { resize: vertical; }
+/* El error se marca con borde Y con texto: el color solo deja afuera a quien
+   no lo distingue. */
+.form .is-error { border-color: var(--color-primary); }
+.form__pista { font-size: 0.85rem; color: var(--color-text-muted); }
+.form__acciones { grid-column: 1 / -1; }
+.form__acciones .btn-primary { margin-top: 0; }
+.form__estado { grid-column: 1 / -1; min-height: 1.6em; font-weight: 600; color: var(--color-text); }
+
+/* --- MAPA ---------------------------------------------------------------- */
+/* aspect-ratio + width 100%: el iframe se adapta al ancho sin deformarse ni
+   necesitar medidas fijas por pantalla. */
+.mapa { max-width: 900px; margin-inline: auto; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-card); }
+.mapa iframe { display: block; width: 100%; height: 420px; border: 0; }
+@media (min-width: 900px) { .mapa iframe { height: 480px; } }
+.mapa__aviso { max-width: 900px; margin: 0.75rem auto 0; text-align: center; font-size: 0.85rem; color: var(--color-text-muted); }
+.mapa__aviso a { color: var(--color-secondary); }
+.direccion { max-width: 900px; margin: 1.5rem auto 0; text-align: center; font-style: normal; color: var(--color-text-muted); line-height: 1.8; }
+.direccion strong { color: var(--color-text); }
+.direccion a { color: var(--color-secondary); font-weight: 600; }
+
+@media (max-width: 600px) { .form { grid-template-columns: 1fr; } }
+
 /* --- 11. AVISO ---------------------------------------------------------- */
 .toast {
     position: fixed; bottom: 2rem; left: 50%; z-index: 300;
@@ -457,10 +575,10 @@ button { font: inherit; cursor: pointer; border: none; }
 
 /* --- 12. FOOTER Y MAPA DEL SITIO ---------------------------------------- */
 .footer {
-    padding: 4rem 0; background-color: var(--color-footer-bg);
+    padding: 3rem 0; background-color: var(--color-footer-bg);
     color: var(--color-footer-text); border-top: 1px solid var(--color-border); transition: background-color var(--transition);
 }
-.footer__bottom { text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
+.footer__bottom { text-align: center; margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--color-border); }
 .footer__legal { margin-top: 0.5rem; color: var(--color-footer-muted); }
 
 .sitemap { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }

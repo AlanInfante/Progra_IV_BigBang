@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO propio de esta página: título (≤ 60 caracteres, si no Google lo
+         corta), descripción y URL únicos. -->
+    <title>Sobre nosotros | The Big Bang Theory</title>
+    <meta name="description" content="Quiénes somos, cómo contactarnos y dónde queda la facultad: UTN Facultad Regional Haedo, Buenos Aires.">
+    <meta name="theme-color" content="#1a1a1a">
+    <!-- Favicon en SVG embebido: sin archivo extra y sin el error 404 que el
+         navegador genera al pedir /favicon.ico. Google lo muestra en resultados. -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛️</text></svg>">
+    <link rel="canonical" href="https://alaninfante.github.io/Progra_IV_BigBang/sobre-nosotros.html">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:site_name" content="The Big Bang Theory">
+    <meta property="og:title" content="Sobre nosotros | The Big Bang Theory">
+    <meta property="og:description" content="Quiénes somos, formulario de contacto y ubicación de la facultad.">
+    <meta property="og:url" content="https://alaninfante.github.io/Progra_IV_BigBang/sobre-nosotros.html">
+    <meta property="og:image" content="https://alaninfante.github.io/Progra_IV_BigBang/Imagenes/hero-relatividad.webp">
+    <meta property="og:image:alt" content="Ilustración del espacio-tiempo curvado, fondo del sitio">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://alaninfante.github.io/Progra_IV_BigBang/Imagenes/hero-relatividad.webp">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <!-- Migas de pan para Google: le muestran dónde está esta página dentro
+         del sitio y puede dibujar la ruta en el resultado de búsqueda. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://alaninfante.github.io/Progra_IV_BigBang/" },
+        { "@type": "ListItem", "position": 2, "name": "Sobre nosotros", "item": "https://alaninfante.github.io/Progra_IV_BigBang/sobre-nosotros.html" }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Alan Infante",
+      "jobTitle": "Desarrollador backend",
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "UTN Facultad Regional Haedo" },
+      "knowsAbout": ["PHP", "MySQL", "JavaScript", "C#", "Oracle PL/SQL"]
+    }
+    </script>
+</head>
+<body>
+    <!-- Aplica el modo guardado ANTES de que se dibuje la página. Si esperara
+         al logic.js (que tiene defer), cada cambio de página mostraría un
+         parpadeo en modo normal antes de pasar a laboratorio. -->
+    <script>
+        try { if (localStorage.getItem('tema') === 'lab') document.body.classList.add('lab-mode'); } catch (e) {}
+    </script>
+
+    <!-- Permite saltar la navegación con teclado. -->
+    <a href="#contenido" class="skip-link">Ir al contenido principal</a>
+
+
+    <header class="header">
+        <nav class="nav" aria-label="Navegación principal">
+            <a class="logo" href="index.html">
+                <span aria-hidden="true">⚛️</span> The Big Bang Theory
+            </a>
+
+            <!-- aria-current marca la página actual: lo usa el lector de
+                 pantalla y el CSS para resaltar el link. -->
+            <ul class="nav__links">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="personajes.html">Personajes</a></li>
+                <li><a href="temporadas.html">Temporadas</a></li>
+                <li><a href="laboratorio.html">Laboratorio</a></li>
+                <li><a href="sobre-nosotros.html" aria-current="page">Sobre nosotros</a></li>
+            </ul>
+
+            <!-- aria-pressed comunica el estado del botón al lector de pantalla. -->
+            <button type="button" id="theme-toggle" class="btn-theme" aria-pressed="false">
+                <span class="btn-theme__icon" aria-hidden="true">🔬</span>
+                <span class="btn-theme__text">Modo laboratorio</span>
+            </button>
+        </nav>
+    </header>
+
+    <main id="contenido" class="fondo-sobre">
+
+        <!-- ===== QUIÉNES SOMOS ===== -->
+        <section id="sobre" class="section section--sobre">
+            <div class="container">
+                <p class="section__eyebrow">Sobre nosotros</p>
+                <h1 class="section__title">Sobre este sitio de The Big Bang Theory</h1>
+                <p class="section__desc">Los siete del apartamento 4A, y el que armó este sitio. Los desafíos están en el <a href="laboratorio.html">laboratorio</a>.</p>
+
+                <div class="sobre">
+                    <article>
+                        <h2>Ellos</h2>
+                        <p>Cuatro científicos de Caltech, una vecina de enfrente y dos investigadoras que terminaron siendo el centro de gravedad del grupo. Entre los siete suman cuatro doctorados, un máster, una misión al espacio y un acuerdo de compañeros de piso de 31 páginas.</p>
+                        <p>Lo que los mantiene juntos no es la ciencia: es la costumbre de cenar los mismos días, en el mismo sillón, discutiendo si Flash corre más rápido que Superman.</p>
+                    </article>
+
+                    <article>
+                        <h2>Yo</h2>
+                        <p class="sobre__rol">Estudiante de Ingeniería en Sistemas</p>
+                        <p>Curso en la UTN Facultad Regional Haedo y trabajo como desarrollador backend. Me muevo entre PHP, MySQL, JavaScript, C# y Oracle, aunque este sitio está hecho a mano con HTML, CSS y JavaScript puros: ni un framework, ni un generador.</p>
+                        <p>Antes de la programación fui profesor de educación física y coach de CrossFit, así que estoy acostumbrado a explicar lo mismo de cinco maneras distintas hasta que alguien lo entiende. Algo de eso hay en cómo está escrito este código: todo comentado, explicando el porqué y no solo el qué.</p>
+
+                        <dl class="facts">
+                            <dt>Especialidad</dt><dd>Desarrollo backend</dd>
+                            <dt>Doble vida</dt><dd>Profesor de educación física y coach de CrossFit</dd>
+                            <dt>Manía</dt><dd>Comentar hasta la última línea</dd>
+                            <dt>Debilidad</dt><dd>Empezar proyectos nuevos antes de terminar el anterior</dd>
+                        </dl>
+
+                        <p class="sobre__firma">Alan Infante</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ===== CONTACTO ===== -->
+        <section id="contacto" class="section">
+            <div class="container">
+                <h2 class="section__title">Escribinos</h2>
+                <p class="section__desc">Dudas sobre la carrera, ganas de sumarte al proyecto o simplemente decirnos que Flash le gana a Superman.</p>
+
+                <!-- novalidate desactiva los carteles del navegador para poder
+                     mostrar mensajes propios, en castellano y con el mismo
+                     estilo. La validación se hace igual en el JS. -->
+                <form class="form" id="form-contacto" novalidate>
+                    <div class="form__campo">
+                        <label for="f-nombre">Tu nombre</label>
+                        <input type="text" id="f-nombre" name="nombre" required autocomplete="name">
+                    </div>
+
+                    <div class="form__campo">
+                        <label for="f-email">Tu correo</label>
+                        <input type="email" id="f-email" name="email" required autocomplete="email"
+                               placeholder="nombre@ejemplo.com">
+                    </div>
+
+                    <div class="form__campo">
+                        <label for="f-asunto">¿De qué se trata?</label>
+                        <select id="f-asunto" name="asunto">
+                            <option>Consulta sobre la carrera</option>
+                            <option>Quiero sumarme al proyecto</option>
+                            <option>Encontré un error en el sitio</option>
+                            <option>Vengo a discutir de cómics</option>
+                        </select>
+                    </div>
+
+                    <div class="form__campo form__campo--ancho">
+                        <label for="f-mensaje">Tu mensaje</label>
+                        <textarea id="f-mensaje" name="mensaje" rows="5" required
+                                  placeholder="Contanos..."></textarea>
+                    </div>
+
+                    <div class="form__campo form__campo--ancho">
+                        <!-- Verificación con una pregunta de la serie en vez de un
+                             captcha: frena a los bots más simples y es más divertido.
+                             No reemplaza a un captcha de verdad. -->
+                        <label for="f-humano" id="f-humano-label">Control anti-robots</label>
+                        <input type="text" id="f-humano" name="humano" required autocomplete="off"
+                               aria-describedby="f-humano-pista">
+                        <p class="form__pista" id="f-humano-pista">Cargando la pregunta...</p>
+                    </div>
+
+                    <div class="form__acciones">
+                        <button type="submit" class="btn-primary">Enviar mensaje</button>
+                    </div>
+
+                    <p id="form-estado" class="form__estado" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- ===== DÓNDE ESTAMOS ===== -->
+        <section id="ubicacion" class="section">
+            <div class="container">
+                <h2 class="section__title">Dónde estamos</h2>
+                <p class="section__desc">La facultad queda en Haedo, partido de Morón, a unos 20 km del centro de Buenos Aires. Nuestro apartamento 4A, lamentablemente, es ficticio.</p>
+
+                <div class="mapa">
+                    <!-- loading="lazy": el mapa es de Google y pesa bastante.
+                         Así no se descarga hasta que el visitante llega acá.
+                         title es obligatorio: es lo que anuncia el lector de pantalla. -->
+                    <iframe
+                        title="Mapa con la ubicación de la UTN Facultad Regional Haedo"
+                        src="https://www.google.com/maps?q=UTN+Facultad+Regional+Haedo&amp;output=embed"
+                        width="600" height="450" loading="lazy" allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <!-- Muchos bloqueadores de publicidad cortan los iframes de Google.
+                     Si eso pasa, el visitante ve el recuadro vacío: esta línea le
+                     da una salida en vez de dejarlo sin nada. -->
+                <p class="mapa__aviso">¿No ves el mapa? Tu navegador puede estar bloqueando el contenido de Google.
+                   <a href="https://www.google.com/maps/search/?api=1&amp;query=UTN+Facultad+Regional+Haedo" target="_blank" rel="noopener">Abrilo en una pestaña nueva</a>.</p>
+
+                <address class="direccion">
+                    <strong>UTN Facultad Regional Haedo</strong><br>
+                    París 532, Haedo, Provincia de Buenos Aires<br>
+                    <a href="https://www.google.com/maps/dir/?api=1&amp;destination=UTN+Facultad+Regional+Haedo"
+                       target="_blank" rel="noopener">Cómo llegar</a>
+                </address>
+            </div>
+        </section>
+    </main>
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <!-- Mapa del sitio: orienta al usuario y le da al rastreador
+                 enlaces internos hacia cada página. -->
+            <nav class="sitemap" aria-label="Mapa del sitio">
+                <div>
+                    <h2>Páginas</h2>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="personajes.html">Personajes</a></li>
+                        <li><a href="temporadas.html">Temporadas</a></li>
+                        <li><a href="laboratorio.html">Laboratorio de pruebas</a></li>
+                        <li><a href="sobre-nosotros.html">Sobre nosotros</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2>Personajes</h2>
+                    <ul>
+                        <li><a href="personajes.html#sheldon">Dr. Sheldon Cooper</a></li>
+                        <li><a href="personajes.html#leonard">Dr. Leonard Hofstadter</a></li>
+                        <li><a href="personajes.html#penny">Penny</a></li>
+                        <li><a href="personajes.html#howard">Howard Wolowitz</a></li>
+                        <li><a href="personajes.html#raj">Dr. Rajesh Koothrappali</a></li>
+                        <li><a href="personajes.html#amy">Dra. Amy Farrah Fowler</a></li>
+                        <li><a href="personajes.html#bernadette">Dra. Bernadette Rostenkowski</a></li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div class="footer__bottom">
+                <p>&copy; 2026 Alan Infante. Hecho con café, código limpio y conocimiento del multiverso.</p>
+                <p class="footer__legal">
+                    <small>Proyecto tributo sin fines de lucro. The Big Bang Theory y sus personajes
+                    son propiedad de Warner Bros. Television y Chuck Lorre Productions.</small>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- defer: se ejecuta con el HTML ya parseado. -->
+    <script src="./logic.js" defer></script>
+</body>
+</html>
