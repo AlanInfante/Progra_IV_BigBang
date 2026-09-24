@@ -26,7 +26,7 @@
     --shadow-card: 0 4px 18px rgba(0, 0, 0, 0.18);
 
     /* Hero en modo normal: mismos colores que el resto de la página. */
-    --overlay-hero: rgba(248, 249, 250, 0.45); /* La imagen ya es clara: velo liviano. */
+    --overlay-hero: rgba(222, 230, 239, 0.55); /* Tinte frío: separa el hero del blanco del header. */
     --color-hero-eyebrow: #1f6f9e; /* Azul oscurecido: el de interfaz no llega a 4.5:1. */
     --color-hero-title: var(--color-text);
     --color-hero-text: var(--color-text-muted);
@@ -167,6 +167,7 @@ button { font: inherit; cursor: pointer; border: none; }
    cruce de fórmulas se hace con la opacidad de la de arriba. */
 .hero {
     position: relative; overflow: hidden; text-align: center;
+    border-bottom: 1px solid var(--color-border);   /* Corta con la sección siguiente. */
     padding: clamp(5rem, 14vw, 10rem) 5%;
     transition: color var(--transition);
 }
@@ -287,13 +288,16 @@ button { font: inherit; cursor: pointer; border: none; }
 .explore {
     list-style: none;
     display: grid;
+    align-items: stretch;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.5rem;
 }
 
+.explore li { display: flex; flex-direction: column; }
+
 .explore__card {
     display: block;
-    height: 100%;
+    flex: 1;
     padding: 2rem 1.5rem;
     background-color: var(--color-bg-card);
     border-top: 4px solid var(--color-secondary);
@@ -307,6 +311,60 @@ button { font: inherit; cursor: pointer; border: none; }
 .explore__icon { display: block; font-size: 2.5rem; margin-bottom: 0.5rem; }
 .explore__card h3 { color: var(--color-text); }
 .explore__card p { color: var(--color-text-muted); }
+
+/* Spoiler tapado: se revela al pasar el mouse o al llegar con Tab.
+   El desenfoque es solo visual; el texto sigue estando para un lector de
+   pantalla, así que no sirve para esconder nada en serio, solo para jugar. */
+.spoiler { display: flex; align-items: baseline; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.85rem; }
+.spoiler__tag { font-family: var(--font-data); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-primary); flex-shrink: 0; }
+.spoiler__texto {
+    color: var(--color-text-muted);
+    filter: blur(4px);
+    cursor: help;
+    transition: filter var(--transition);
+}
+.spoiler__texto:hover, .spoiler__texto:focus-visible { filter: blur(0); }
+
+/* Quien pidió menos movimiento ve el spoiler destapado desde el principio:
+   un texto que aparece y desaparece puede molestar. */
+@media (prefers-reduced-motion: reduce) { .spoiler__texto { filter: none; } }
+
+/* --- LÍNEA DE TIEMPO ----------------------------------------------------- */
+.linea { list-style: none; max-width: 780px; margin-inline: auto; position: relative; }
+
+/* La línea vertical es un pseudo-elemento: decoración pura, no necesita
+   una etiqueta propia en el HTML. */
+.linea::before {
+    content: "";
+    position: absolute; top: 8px; bottom: 8px; left: 86px;
+    width: 2px; background: var(--color-border);
+}
+
+.hito { position: relative; display: grid; grid-template-columns: 70px 1fr; gap: 2rem; padding-bottom: 1.75rem; }
+
+.hito__anio { font-family: var(--font-data); font-weight: 600; color: var(--color-secondary); text-align: right; padding-top: 0.15rem; }
+
+/* El punto sobre la línea, alineado con el año. */
+.hito::before {
+    content: "";
+    position: absolute; left: 81px; top: 8px;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--color-bg-section); border: 2px solid var(--color-secondary);
+}
+
+.hito--destacado::before { background: var(--color-primary); border-color: var(--color-primary); }
+.hito--destacado .hito__anio { color: var(--color-primary); }
+
+.hito__cuerpo h3 { font-size: 1.05rem; color: var(--color-text); margin-bottom: 0.25rem; }
+.hito__cuerpo p { color: var(--color-text-muted); font-size: 0.95rem; }
+
+/* En celular el año pasa arriba del texto: en dos columnas de 70 px no entra
+   ni el título. */
+@media (max-width: 600px) {
+    .linea::before, .hito::before { display: none; }
+    .hito { grid-template-columns: 1fr; gap: 0.25rem; padding-bottom: 1.5rem; border-left: 2px solid var(--color-border); padding-left: 1rem; }
+    .hito__anio { text-align: left; }
+}
 
 /* --- TEMPORADAS ---------------------------------------------------------- */
 .seasons {
@@ -374,6 +432,22 @@ button { font: inherit; cursor: pointer; border: none; }
 .lab-mode .section--temporadas {
     background-image: url('Imagenes/temporadas-lab.webp');
 }
+
+/* --- FONDO DEL INICIO ---------------------------------------------------- */
+/* Envuelve solo lo que va debajo del hero: el hero tiene imagen propia.
+   Como en las otras páginas, la imagen es transparente y el color lo pone
+   este contenedor, con las secciones en transparente para no taparla. */
+.fondo-inicio {
+    background-color: var(--color-bg-section);
+    background-image: url('Imagenes/inicio.webp');
+    background-size: 1920px auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+    transition: background-color var(--transition);
+}
+
+.lab-mode .fondo-inicio { background-image: url('Imagenes/inicio-lab.webp'); }
+.fondo-inicio .section { background-color: transparent; }
 
 /* --- FONDO DE SOBRE NOSOTROS -------------------------------------------- */
 /* Mismo patrón que el laboratorio: una sola imagen larga en el <main>, con

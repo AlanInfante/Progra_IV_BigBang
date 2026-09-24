@@ -93,39 +93,164 @@
         </section>
 
 
-        <!-- ===== ACCESOS ===== -->
-        <!-- Toda la tarjeta es un solo link: área grande y fácil de tocar,
-             y un único destino por tarjeta para el lector de pantalla. -->
-        <section class="section">
-            <div class="container">
-                <h2 class="section__title">Explorá el universo</h2>
-                <p class="section__desc">Todo lo que querés saber de la serie, de sus personajes y de la ciencia detrás de los chistes.</p>
+        <div class="fondo-inicio">
+            <!-- ===== ACCESOS ===== -->
+            <!-- Toda la tarjeta es un solo link: área grande y fácil de tocar,
+                 y un único destino por tarjeta para el lector de pantalla. -->
+            <section class="section">
+                <div class="container">
+                    <h2 class="section__title">Explorá el universo</h2>
+                    <p class="section__desc">Todo lo que querés saber de la serie, de sus personajes y de la ciencia detrás de los chistes. Los spoilers están tapados: pasá el mouse por encima si te animás.</p>
 
-                <ul class="explore">
-                    <li>
-                        <a class="explore__card" href="personajes.html">
-                            <span class="explore__icon" aria-hidden="true">🧑‍🔬</span>
-                            <h3>Personajes</h3>
-                            <p>Siete personas, cuatro doctorados y una dinámica social fascinante.</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="explore__card" href="temporadas.html">
-                            <span class="explore__icon" aria-hidden="true">📺</span>
-                            <h3>Temporadas</h3>
-                            <p>Doce temporadas y 279 episodios, de 2007 a 2019.</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="explore__card" href="laboratorio.html">
-                            <span class="explore__icon" aria-hidden="true">🧪</span>
-                            <h3>Laboratorio</h3>
-                            <p>Seis preguntas de física y de la serie. ¿Estás a la altura?</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </section>
+                    <ul class="explore">
+                        <li>
+                            <a class="explore__card" href="personajes.html">
+                                <span class="explore__icon" aria-hidden="true">🧑‍🔬</span>
+                                <h3>Personajes</h3>
+                                <p>Siete personas, cuatro doctorados y una dinámica social fascinante.</p>
+                            </a>
+                            <!-- El spoiler va FUERA del enlace: un elemento con foco propio dentro
+                                 de un <a> es HTML inválido y confunde al lector de pantalla. -->
+                            <p class="spoiler">
+                                <span class="spoiler__tag">spoiler</span>
+                                <span class="spoiler__texto" tabindex="0">Uno de ellos no puede hablarle a una mujer sin tomar algo antes.</span>
+                            </p>
+                        </li>
+                        <li>
+                            <a class="explore__card" href="temporadas.html">
+                                <span class="explore__icon" aria-hidden="true">📺</span>
+                                <h3>Temporadas</h3>
+                                <p>Doce temporadas y 279 episodios, de 2007 a 2019.</p>
+                            </a>
+                            <!-- El spoiler va FUERA del enlace: un elemento con foco propio dentro
+                                 de un <a> es HTML inválido y confunde al lector de pantalla. -->
+                            <p class="spoiler">
+                                <span class="spoiler__tag">spoiler</span>
+                                <span class="spoiler__texto" tabindex="0">El ascensor sigue roto. Doce años. Doce.</span>
+                            </p>
+                        </li>
+                        <li>
+                            <a class="explore__card" href="laboratorio.html">
+                                <span class="explore__icon" aria-hidden="true">🧪</span>
+                                <h3>Laboratorio</h3>
+                                <p>Un quiz de ciencia, una terminal y un enigma de lógica.</p>
+                            </a>
+                            <!-- El spoiler va FUERA del enlace: un elemento con foco propio dentro
+                                 de un <a> es HTML inválido y confunde al lector de pantalla. -->
+                            <p class="spoiler">
+                                <span class="spoiler__tag">spoiler</span>
+                                <span class="spoiler__texto" tabindex="0">El gato está vivo. Y muerto. Las dos cosas.</span>
+                            </p>
+                        </li>
+                        <li>
+                            <a class="explore__card" href="sobre-nosotros.html">
+                                <span class="explore__icon" aria-hidden="true">📍</span>
+                                <h3>Sobre nosotros</h3>
+                                <p>Quiénes somos, cómo escribirnos y dónde estamos.</p>
+                            </a>
+                            <!-- El spoiler va FUERA del enlace: un elemento con foco propio dentro
+                                 de un <a> es HTML inválido y confunde al lector de pantalla. -->
+                            <p class="spoiler">
+                                <span class="spoiler__tag">spoiler</span>
+                                <span class="spoiler__texto" tabindex="0">El apartamento 4A es ficticio. La facultad, lamentablemente, no.</span>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===== LÍNEA DE TIEMPO ===== -->
+            <section id="linea" class="section">
+                <div class="container">
+                    <p class="section__eyebrow">La colección de Sheldon</p>
+                    <h2 class="section__title">Una línea de tiempo nerd</h2>
+                    <p class="section__desc">Los cómics, las series y los descubrimientos que discuten en el sofá del 4A, en el orden en que pasaron de verdad.</p>
+
+                    <!-- <ol> y no <ul>: el orden cronológico es parte del contenido,
+                         y así lo entienden el buscador y el lector de pantalla. -->
+                    <ol class="linea">
+                        <li class="hito">
+                            <p class="hito__anio">1938</p>
+                            <div class="hito__cuerpo">
+                                <h3>Nace Superman</h3>
+                                <p>Action Comics #1. El primer superhéroe con capa, y el comienzo de la edad de oro del cómic.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1939</p>
+                            <div class="hito__cuerpo">
+                                <h3>Aparece Batman</h3>
+                                <p>Detective Comics #27. Sin superpoderes: solo dinero, rencor y muy poco sueño.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1940</p>
+                            <div class="hito__cuerpo">
+                                <h3>El Flash</h3>
+                                <p>Flash Comics #1. El velocista de la remera roja que usa Sheldon en medio episodio.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1962</p>
+                            <div class="hito__cuerpo">
+                                <h3>Spider-Man</h3>
+                                <p>Amazing Fantasy #15. Un adolescente con problemas de alquiler se convierte en el héroe más popular de Marvel.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1966</p>
+                            <div class="hito__cuerpo">
+                                <h3>Star Trek llega a la TV</h3>
+                                <p>La serie que le da a Sheldon su saludo, su lógica y su admiración por Spock.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1974</p>
+                            <div class="hito__cuerpo">
+                                <h3>Dungeons &amp; Dragons</h3>
+                                <p>El juego de rol que inventó el dado de 20 caras y media cultura geek posterior.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1977</p>
+                            <div class="hito__cuerpo">
+                                <h3>Star Wars</h3>
+                                <p>La película que fundó la discusión eterna: ¿Star Wars o Star Trek?</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">1985</p>
+                            <div class="hito__cuerpo">
+                                <h3>Nintendo en Estados Unidos</h3>
+                                <p>Llega la consola que convirtió los videojuegos en algo de todos los días.</p>
+                            </div>
+                        </li>
+                        <li class="hito hito--destacado">
+                            <p class="hito__anio">2007</p>
+                            <div class="hito__cuerpo">
+                                <h3>Empieza The Big Bang Theory</h3>
+                                <p>24 de septiembre. Penny se muda al 4B y el apartamento de enfrente no vuelve a ser el mismo.</p>
+                            </div>
+                        </li>
+                        <li class="hito">
+                            <p class="hito__anio">2012</p>
+                            <div class="hito__cuerpo">
+                                <h3>Se confirma el bosón de Higgs</h3>
+                                <p>El CERN encuentra la partícula que explica por qué las cosas tienen masa. Llevaba 48 años predicha.</p>
+                            </div>
+                        </li>
+                        <li class="hito hito--destacado">
+                            <p class="hito__anio">2019</p>
+                            <div class="hito__cuerpo">
+                                <h3>La primera foto de un agujero negro</h3>
+                                <p>En abril el telescopio Event Horizon la publica. Un mes después, la serie termina.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+
     </main>
 
     <footer class="footer">
